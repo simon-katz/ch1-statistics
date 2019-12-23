@@ -30,6 +30,11 @@
        (i/$where {"Election Year" {:$eq nil}})
        (i/to-map)))
 
+(defn ex-1-5-nomis-a []
+  (->> (ex-1-5)
+       vals
+       frequencies))
+
 (defn ex-1-6 []
   (->> (load-data :uk-scrubbed)
        (i/$ "Electorate")
