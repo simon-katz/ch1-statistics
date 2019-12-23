@@ -62,6 +62,11 @@
             (quantile q xs))]
     (map f [0 1/4 1/2 3/4 1])))
 
+(defn ex-1-10-nomis-a []
+  (let [xs (->> (load-data :uk-scrubbed)
+                (i/$ "Electorate"))]
+    (map #(quantile % xs)
+         [0 1/4 1/2 3/4 1])))
 
 (defn ex-1-11 []
   (->> (load-data :uk-scrubbed)
