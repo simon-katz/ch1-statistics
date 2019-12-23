@@ -27,6 +27,12 @@
                            (i/sq (- x x-bar)))]
     (mean (map square-deviation xs))))
 
+(defn variance-nomis [xs]
+  (let [x-bar (mean xs)]
+    (letfn [(deviation-squared [x] (i/sq (- x x-bar)))]
+      (-> (map deviation-squared xs)
+          mean))))
+
 (defn standard-deviation [xs]
   (i/sqrt (variance xs)))
 
