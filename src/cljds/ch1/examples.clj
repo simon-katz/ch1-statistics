@@ -141,6 +141,18 @@
                    :nbins 25)
       (i/view)))
 
+(defn nomis-illustrate-dishonest-baker-1 []
+  (->> (take 10000 (dishonest-baker 950 30))
+       (bin 6)
+       frequencies
+       sort))
+
+(defn nomis-illustrate-dishonest-baker-2 []
+  (-> (take 10000 (dishonest-baker 950 30))
+      (c/histogram :x-label "Dishonest baker"
+                   :nbins 6)
+      (i/view)))
+
 (defn ex-1-20 []
   (let [weights (take 10000 (dishonest-baker 950 30))]
     {:mean (mean weights)
