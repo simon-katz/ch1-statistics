@@ -30,6 +30,22 @@
        (i/$where {"Election Year" {:$eq nil}})
        (i/to-map)))
 
+(defn nomis-demo-to-map-is-wonky []
+  (letfn [(to-map-test [n]
+            (let [x (->> (load-data :uk)
+                         (i/$where {"Electorate" {:$gt n}})
+                         (i/to-map)
+                         (#(get % :Electorate)))]
+              [(type x)
+               x]))]
+    [(to-map-test  90000) ; gives a sequence of values
+     (to-map-test 100000) ; gives a value -- grrr! -- not mentioned in the doc string
+     ]))
+;; (foo)
+;; => [[clojure.lang.LazySeq (90674.0 109922.0 90110.0)]
+;;     [java.lang.Double 109922.0]]
+
+
 (defn ex-1-5-nomis-a []
   (->> (ex-1-5)
        vals
